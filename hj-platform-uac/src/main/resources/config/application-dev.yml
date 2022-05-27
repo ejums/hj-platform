@@ -1,0 +1,12 @@
+spring:
+  r2dbc:
+    url: r2dbc:mysql://hj-developer:123456@127.0.0.1:3308/hj-platform?serverTimezone=GMT%2B8
+    properties:
+      timezone: GMT+8
+  devtools:
+    add-properties: true
+logging:
+  level:
+    com.hj: DEBUG
+debug: true
+

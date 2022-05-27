@@ -1,0 +1,43 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+group 'com.hj'
+version '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+    maven { url 'https://repo.spring.io/milestone' }
+}
+
+task sourcesJar(type: Jar, dependsOn: classes){
+    archiveClassifier.set 'sources'
+    archiveClassifier.convention 'sources'
+    from sourceSets.main.allSource
+}
+
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    compileOnly 'org.projectlombok:lombok:1.18.20'
+    implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc:3.0.0-M3'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.2'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+publishing{
+    publications{
+        Maven(MavenPublication){
+            artifact sourcesJar
+            from components.java
+        }
+    }
+}

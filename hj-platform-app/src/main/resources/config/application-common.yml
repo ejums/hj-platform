@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      username: hj-developer
+      password: 123456
+    url: jdbc:mysql://localhost:3308/hj-mold
+logging:
+  level:
+    com.ejums: DEBUG

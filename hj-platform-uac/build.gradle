@@ -20,22 +20,34 @@ repositories {
     maven { url 'https://repo.spring.io/milestone' }
 }
 
+
+
+dependencyManagement {
+    imports {
+        mavenBom 'com.hj:hj-platform-parent:0.0.1-SNAPSHOT'
+    }
+}
+
+
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
-    implementation 'org.aspectj:aspectjweaver:1.8.7'
-    implementation 'dev.miku:r2dbc-mysql:0.8.2.RELEASE'
-    compileOnly 'org.projectlombok:lombok'
-    compileOnly 'jakarta.servlet:jakarta.servlet-api:5.0.0'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    implementation 'org.aspectj:aspectjweaver'
+    implementation 'dev.miku:r2dbc-mysql'
+    compileOnly 'org.projectlombok:lombok'
+    compileOnly 'jakarta.servlet:jakarta.servlet-api'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     // second-party library
     implementation 'com.hj:hj-platform-common:0.0.1-SNAPSHOT'

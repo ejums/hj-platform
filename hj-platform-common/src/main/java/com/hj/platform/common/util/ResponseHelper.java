@@ -1,6 +1,5 @@
 package com.hj.platform.common.util;
 
-import com.hj.platform.common.contants.ExceptionConstants;
 import com.hj.platform.common.vo.HttpResult;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferFactory;
@@ -15,9 +14,7 @@ import java.nio.charset.StandardCharsets;
  */
 public class ResponseHelper {
 
-    private ResponseHelper() throws InstantiationException {
-        throw ExceptionConstants.UTIL_CLASS_UN_INITIALIZED;
-    }
+    private ResponseHelper() throws InstantiationException {}
 
     public static Mono<Void> write(ServerHttpResponse response, byte[] bytes){
         DataBufferFactory bufferFactory = response.bufferFactory();

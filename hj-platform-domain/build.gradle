@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'maven-publish'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 }
 
 group 'com.hj'
@@ -19,14 +20,20 @@ task sourcesJar(type: Jar, dependsOn: classes){
     from sourceSets.main.allSource
 }
 
+dependencyManagement {
+    imports {
+        mavenBom 'com.hj:hj-platform-parent:0.0.1-SNAPSHOT'
+    }
+}
+
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
-    compileOnly 'org.projectlombok:lombok:1.18.20'
-    implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc:3.0.0-M3'
-    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.2'
-    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+    compileOnly 'org.projectlombok:lombok'
+    implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations'
+    annotationProcessor 'org.projectlombok:lombok'
 }
 
 test {

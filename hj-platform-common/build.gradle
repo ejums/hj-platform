@@ -15,7 +15,10 @@ repositories {
 
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-webflux:3.0.0-M3'
+    compileOnly 'org.springframework.boot:spring-boot-starter-webflux'
+    compileOnly 'org.springframework.security:spring-security-core'
+    compileOnly 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
+    compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
     testImplementation 'com.hj:hj-platform-test:0.0.1-SNAPSHOT'
     compileClasspath 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'

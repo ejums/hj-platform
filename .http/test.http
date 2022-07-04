@@ -10,11 +10,43 @@ username=admin&password=123456
 POST http://localhost:8080/oauth/login
 Content-Type: application/json
 
+//{
+//  "username": "admin",
+//  "password": "123456"
+//}
 {
-  "username": "admin",
-  "password": "123456"
+  "installed": {
+    "client_id": "582232199444-tcg6nm7no73k46jcfch54g99co954vcc.apps.googleusercontent.com",
+    "project_id": "halogen-welder-285001",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs"
+  }
 }
 
 ### 获取用户列表
 GET http://localhost:8080/api/user/list
 
+
+### Github S1
+GET https://github.com/login/oauth/authorize?client_id=46d285d85efb4cdc45ca&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Foauth%2Fredirect&scope=user&state=27823
+
+###
+POST https://github.com/login/oauth/access_token
+Content-Type: application/json
+
+{
+  "client_id": "46d285d85efb4cdc45ca",
+  "client_secret": "39b531788830211b25598f67de9d7978a5a03ee5",
+  "code": "cf9aa2cd59136544a4ba",
+  "state": "27823",
+  "redirect_uri": "http://localhost:8080/oauth/redirect"
+}
+
+###
+POST https://api.github.com/user
+Authorization: Bearer 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
+
+###
+GET https://gitee.com/api/v5/user
+Authorization: Bearer

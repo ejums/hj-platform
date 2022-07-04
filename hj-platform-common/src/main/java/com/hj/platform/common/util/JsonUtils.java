@@ -1,9 +1,5 @@
 package com.hj.platform.common.util;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.core.JacksonException;
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.*;
@@ -17,7 +13,6 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 import com.hj.platform.common.contants.TypeReferences;
 import com.hj.platform.common.exception.JsonSerializableException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferUtils;
@@ -31,21 +26,13 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Map;
-import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
- * @author <a href="mailto:hjm0928@sina.cn">韩金</a>
+ * @author <a href="mailto:hjm0928@sina.cn">韩金明</a>
  */
 @Component
-public class JsonUtils{
-    private JsonUtils() throws InstantiationException {
-        synchronized (this){
-            if(JsonUtils.objectMapper != null) {
-                throw new InstantiationException("JsonUtils.objectMapper不为空时，不允许被实例化");
-            }
-        }
-    }
+public class JsonUtils {
 
     private static ObjectMapper objectMapper;
 
@@ -64,6 +51,18 @@ public class JsonUtils{
         return objectMapper;
     }
 
+    public static <T> T parseObject(String str, Class<T> clazz){
+        return parseObject(str.getBytes(StandardCharsets.UTF_8), clazz);
+    }
+
+    public static <T> T parseObject(byte[] bytes, Class<T> clazz){
+        try {
+            return objectMapper.readValue(bytes, clazz);
+        } catch (IOException e) {
+            throw new JsonSerializableException("json反序列化失败", e);
+        }
+    }
+
     public static <T> T parseObject(Flux<DataBuffer> dataBufferFlux, TypeReference<T> reference){
         AtomicReference<String> atomicStrReference = new AtomicReference<>();
         dataBufferFlux.subscribe(dataBuffer -> {
@@ -75,8 +74,18 @@ public class JsonUtils{
         return parseObject(atomicStrReference.get().getBytes(), reference);
     }
 
+    public static Map<String, Object> parseObject(String str){
+        return parseObject(str.getBytes(), TypeReferences.STRING_OBJECT_MAP);
+    }
+
     public static Map<String, Object> parseObject(byte[] bytes){
         return parseObject(bytes, TypeReferences.STRING_OBJECT_MAP);
+    }
+
+
+
+    public static <T> T parseObject(String str, JavaType type){
+        return parseObject(str.getBytes(), type);
     }
 
     public static <T> T parseObject(byte[] bytes, JavaType type){
@@ -85,6 +94,11 @@ public class JsonUtils{
         } catch (IOException e) {
             throw new JsonSerializableException("json反序列化失败", e);
         }
+    }
+
+
+    public static <T> T parseObject(String str, TypeReference<T> reference){
+        return parseObject(str.getBytes(StandardCharsets.UTF_8), reference);
     }
 
     public static <T> T parseObject(byte[] bytes, TypeReference<T> reference){

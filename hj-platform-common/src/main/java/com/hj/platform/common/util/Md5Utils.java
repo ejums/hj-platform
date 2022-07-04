@@ -1,6 +1,5 @@
 package com.hj.platform.common.util;
 
-import com.hj.platform.common.contants.ExceptionConstants;
 import lombok.extern.slf4j.Slf4j;
 
 import java.nio.charset.StandardCharsets;
@@ -13,9 +12,8 @@ import java.util.Base64;
  */
 @Slf4j
 public class Md5Utils {
-    private Md5Utils() throws InstantiationException {
-        throw ExceptionConstants.UTIL_CLASS_UN_INITIALIZED;
-    }
+
+    protected Md5Utils() throws InstantiationException {}
 
     public static String md5(String source) {
         Base64.Encoder encoder = Base64.getEncoder();

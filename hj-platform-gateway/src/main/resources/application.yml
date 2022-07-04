@@ -1,0 +1,17 @@
+server:
+  port: 80
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: uac
+          uri: http://localhost:8080
+          predicates:
+            - Path=/user/**,/oauth/**,/login/**,/login,/oauth2/**
+        - id: app
+          uri: http://localhost:19091
+          predicates:
+            - Path=/app/**
+logging:
+  level:
+    com.hj: INFO

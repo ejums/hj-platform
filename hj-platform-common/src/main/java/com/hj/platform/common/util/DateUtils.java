@@ -1,7 +1,5 @@
 package com.hj.platform.common.util;
 
-import com.hj.platform.common.contants.ExceptionConstants;
-
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAccessor;
@@ -18,9 +16,8 @@ public class DateUtils {
 
     private static final ZoneOffset LOCAL_ZONE =  ZoneOffset.of("+8");
 
-    private DateUtils() throws InstantiationException {
-        throw ExceptionConstants.UTIL_CLASS_UN_INITIALIZED;
-    }
+    protected DateUtils() throws InstantiationException {}
+
 
     public static String stringify(DateTimeFormatter formatter, TemporalAccessor temporalAccessor){
         return formatter.format(temporalAccessor);

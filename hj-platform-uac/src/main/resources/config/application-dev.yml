@@ -12,14 +12,17 @@ spring:
         provider:
           gitee:
             authorization-uri: https://gitee.com/oauth/authorize
-            token-uri: https://gitee.com/oauth/token
-            user-info-uri: https://gitee.com/api/v5/user
+#            token-uri: https://gitee.com/oauth/token
+            token-uri: http://localhost/oauth/token
+#            user-info-uri: https://gitee.com/api/v5/user
+            user-info-uri: http://localhost/oauth/user
             user-name-attribute: "id"
         registration:
           github:
             client-id: 46d285d85efb4cdc45ca
             client-secret: bccfe3f874c46795b08a16c01a2667e92d761b21
             redirect-uri: http://localhost:8080/login/oauth2/code/github
+            clientName: github
           gitee:
             client-id: 2dc4c5611a309092fcb12f510a34745fad462fb17202bf2a625b04abcac469a4
             client-secret: 438244db87ef9c7589a46218b50f3041f64142bdc1b247c97e236a3fcd0813f4
@@ -27,9 +30,6 @@ spring:
             authorization-grant-type: authorization_code
             client-authentication-method: client_secret_post
             scope: user_info, emails
-logging:
-  level:
-    com.hj: DEBUG
-system:
-  config:
-    debug: true
+            clientName: "码云"
+  main:
+    allow-bean-definition-overriding: true

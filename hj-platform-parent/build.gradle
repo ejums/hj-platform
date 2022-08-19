@@ -4,9 +4,9 @@ plugins {
 	id "maven-publish"
 }
 ext {
-	springBootVersion = "3.0.0-M3"
+	springBootVersion = "3.0.0-M4"
 	springFramworkVersion = "6.0.0-M5"
-	springCloudVersion = "3.0.0-M3"
+	springCloudVersion = "3.0.0-M4"
 }
 
 group = "com.hj"
@@ -30,7 +30,6 @@ dependencyManagement{
 	}
 	dependencies {
 		dependency "org.springframework.boot:spring-boot-starter-webflux:${springBootVersion}"
-		dependency "org.springframework.boot:spring-boot-starter-webflux:${springBootVersion}"
 		dependency "org.springframework.boot:spring-boot-starter-data-redis-reactive:${springBootVersion}"
 		dependency "org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}"
 		dependency "org.springframework.security:spring-security-core:${springFramworkVersion}"
@@ -42,9 +41,9 @@ dependencyManagement{
 		dependency "org.springframework.boot:spring-boot-starter-oauth2-client:${springBootVersion}"
 		dependency "org.springframework.boot:spring-boot-starter-oauth2-resource-server:${springBootVersion}"
 		dependency "org.springframework.boot:spring-boot-starter-security:${springBootVersion}"
-		dependency "org.springframework.cloud:spring-cloud-starter-gateway:${springCloudVersion}"
 		dependency "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
 		dependency "org.junit.jupiter:junit-jupiter:5.8.2"
+		dependency "org.junit.jupiter:junit-jupiter-engine:5.8.2"
 		dependency "org.mockito:mockito-core:4.4.0"
 		dependency "org.projectlombok:lombok:1.18.22"
 		dependency "dev.miku:r2dbc-mysql:0.8.2.RELEASE"

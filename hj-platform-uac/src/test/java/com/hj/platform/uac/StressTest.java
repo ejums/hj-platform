@@ -29,22 +29,4 @@ public class StressTest {
 
         private E t2;
     }
-
-    public static void main(String[] args) throws IOException {
-        A<B<C>, C> a = new A<>();
-        a.name = "aObject";
-        a.t1 = new B<>();
-        a.t2 = new C();
-        a.t1.info = new C();
-        a.t2.value = "32";
-        a.t1.age = 3;
-        a.t1.info.value = "33";
-        ObjectMapper mapper = new ObjectMapper();
-        String s = mapper.writeValueAsString(a);
-        JavaType cType = TypeFactory.defaultInstance().constructType(C.class);
-        JavaType bType = TypeFactory.defaultInstance().constructParametricType(B.class, C.class);
-        JavaType aType = TypeFactory.defaultInstance().constructParametricType(A.class, bType, cType);
-        A<B<C>,C> o = mapper.readValue(s, aType);
-        System.out.println(s);
-    }
 }

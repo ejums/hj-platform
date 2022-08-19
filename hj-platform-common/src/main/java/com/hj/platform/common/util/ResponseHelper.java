@@ -14,7 +14,7 @@ import java.nio.charset.StandardCharsets;
  */
 public class ResponseHelper {
 
-    private ResponseHelper() throws InstantiationException {}
+    private ResponseHelper(){}
 
     public static Mono<Void> write(ServerHttpResponse response, byte[] bytes){
         DataBufferFactory bufferFactory = response.bufferFactory();

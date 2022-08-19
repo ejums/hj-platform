@@ -41,10 +41,12 @@ public class ReactiveSecurityHolder {
     private static final ThreadLocal<ServerWebExchange> CONTEXT_HOLDER = new InheritableThreadLocal<>();
 
     public static void setExchange(ServerWebExchange obj) {
+        log.debug("setExchange in thread {}", Thread.currentThread().getId());
         CONTEXT_HOLDER.set(obj);
     }
 
     public static ServerWebExchange getExchange(){
+        log.debug("getExchange in thread {}", Thread.currentThread().getId());
         return CONTEXT_HOLDER.get();
     }
 
@@ -104,14 +106,19 @@ public class ReactiveSecurityHolder {
         return new WebFluxRegistrations() {
             @Override
             public RequestMappingHandlerMapping getRequestMappingHandlerMapping() {
-                return new RequestMappingHandlerMapping(){
-                    @Override
-                    protected RequestMappingInfo getMatchingMapping(RequestMappingInfo info,
-                                                                    ServerWebExchange exchange) {
-                        ReactiveSecurityHolder.setExchange(exchange);
-                        return super.getMatchingMapping(info, exchange);
-                    }
-                };
+                return requestMappingHandlerMapping();
+            }
+        };
+    }
+
+
+    public RequestMappingHandlerMapping requestMappingHandlerMapping(){
+        return new RequestMappingHandlerMapping(){
+            @Override
+            protected RequestMappingInfo getMatchingMapping(RequestMappingInfo info,
+                                                            ServerWebExchange exchange) {
+                ReactiveSecurityHolder.setExchange(exchange);
+                return super.getMatchingMapping(info, exchange);
             }
         };
     }

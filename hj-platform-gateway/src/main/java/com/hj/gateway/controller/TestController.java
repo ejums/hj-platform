@@ -12,24 +12,7 @@ import reactor.core.publisher.Mono;
 @RestController
 public class TestController {
     @GetMapping
-    public Mono<?> index(){
-        Mono.deferContextual(Mono::just).contextWrite(context -> context.put("sa", "sa-value"))
-                .subscribe(context->{
-            try {
-                String value = new ObjectMapper().writeValueAsString(context);
-                System.out.println(value);
-            } catch (JsonProcessingException e) {
-                throw new RuntimeException(e);
-            }
-        });
-        Mono.deferContextual(Mono::just)
-                .contextWrite(context -> {
-                    context.size();
-                    return context;
-                })
-                .subscribe(contextView -> {
-                    System.out.println(contextView.size());
-                });
+    public Mono<String> index(){
         return Mono.just("hello world, Gateway");
     }
 }

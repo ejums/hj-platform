@@ -82,6 +82,13 @@ public class JsonUtils {
         return parseObject(bytes, TypeReferences.STRING_OBJECT_MAP);
     }
 
+    public static <T, R> R convert(T t, Class<R> clazz){
+        return objectMapper.convertValue(t, clazz);
+    }
+
+    public static <T, R> R convert(T t, TypeReference<R> references){
+        return objectMapper.convertValue(t, references);
+    }
 
 
     public static <T> T parseObject(String str, JavaType type){

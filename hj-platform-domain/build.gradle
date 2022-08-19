@@ -43,6 +43,14 @@ test {
 publishing{
     publications{
         Maven(MavenPublication){
+            versionMapping {
+                usage('java-api') {
+                    fromResolutionOf('runtimeClasspath')
+                }
+                usage('java-runtime') {
+                    fromResolutionResult()
+                }
+            }
             artifact sourcesJar
             from components.java
         }
